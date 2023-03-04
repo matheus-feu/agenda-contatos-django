@@ -1,0 +1,83 @@
+.btn-eyes {
+    border: none;
+    color: #007bff;
+    background-color: inherit;
+    cursor: pointer;
+    zoom: 1.2;
+    outline: none;
+}
+
+.btn-edit {
+    border: none;
+    color: #e0a800;
+    background-color: inherit;
+    cursor: pointer;
+    zoom: 1.2;
+    outline: none;
+}
+
+.btn-trash {
+    border: none;
+    color: #e3342f;
+    background-color: inherit;
+    cursor: pointer;
+    zoom: 1.2;
+    outline: none;
+}
+
+
+html, body {
+    margin: 0;
+    height: 100vh;
+}
+
+.search-box{
+    position: absolute;
+    top: 16%;
+    left: 87%;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    background: #343a40;
+    padding: -10px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    line-height: 40px;
+    width: 0;
+    transition: .5s;
+}
+
+.search-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #343a40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+.search-box:hover > .search-txt {
+    width: 200px;
+    padding: 0 6px;
+}
+
+.search-box:hover > .search-btn {
+    background: #007bff;
+}
+
+::-webkit-input-placeholder {
+    color: white;
+}
+

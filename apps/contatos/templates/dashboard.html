@@ -1,0 +1,35 @@
+{% extends '_layouts/base.html' %}
+
+{% block conteudo %}
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mt-5 text-center">
+            <span style="font-size:35px; font-weight: bold">Olá, seja bem vindo {{ user.get_full_name }} a sua agenda!</span>
+        </div>
+        <div class="col-lg-12">
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="card-body"><h4 class="card-title">Cadastrar Contatos</h4>
+                                <p class="card-text"> Cadastre aqui um novo <code>contato</code>. </p> <a
+                                        href="{% url 'contato:cadastrar_contato' %}" class="btn btn-primary"> Novo Contato </a></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="card">
+                            <div class="card-body"><h4 class="card-title">Lista de Contatos</h4>
+                                <p class="card-text"> Veja aqui a lista de <code>contatos</code> cadastrados. </p> <a
+                                        href="{% url 'contatos:lista_contatos' %}" class="btn btn-primary">Vá para Lista </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

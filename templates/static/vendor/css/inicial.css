@@ -1,0 +1,65 @@
+body {
+
+    text-align: center;
+}
+
+/* Criando o balão */
+
+.bubble {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 5px;
+    color: #333;
+    display: inline-block;
+    font: 16px/24px sans-serif;
+    padding: 24px 48px;
+    position: relative;
+
+}
+
+/* Criando o triângulo */
+
+.bubble.active:after,
+.bubble.active:before {
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #fff;
+    bottom: -15px;
+    content: '';
+    left: 50%;
+    margin-left: -15px;
+    position: absolute;
+}
+
+/* Criando a borda do triângulo */
+
+.bubble.active:before {
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 18px solid;
+    border-top-color: inherit;
+    bottom: -18px;
+    margin-left: -18px;
+}
+
+.circle {
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.circle img {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+

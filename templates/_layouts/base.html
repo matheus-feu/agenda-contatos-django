@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Title -->
+    <title>{% block title %}Página Inicial{% endblock %}</title>
+
+    <!-- JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap core CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="{% static 'vendor/css/fontawesome.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/css/style.css' %}" rel="stylesheet">
+
+
+    {% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    {% include '_partials/_navbar.html' %}
+
+    <!-- Conteúdo do site -->
+    {% block conteudo %}{% endblock %}
+
+    <!-- Footer -->
+    {% block endbody %}{% endblock %}
+
+
+
+</body>
+
+</html>
+

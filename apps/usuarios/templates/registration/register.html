@@ -1,0 +1,134 @@
+{% extends '_layouts/base.html' %}
+
+{% load static %}
+
+{% block title %}Cadastrar Usuário{% endblock %}
+
+{% block head %}
+    <link href="{% static 'vendor/css/register.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block conteudo %}
+
+    <body class="bg-light ">
+
+    <div class="container py-5 ">
+        <div class="align-center">
+
+            <div>
+                <h1 class="h3 mb-3 font-weight-normal">Cadastro</h1>
+            </div>
+
+            <form class="needs-validation" method="POST">
+                {% csrf_token %}
+
+                {% include '_partials/_messages.html' %}
+
+                    <!-- Exibe mensagens de erro para todos os campos -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Nome</label>
+                        <input type="text" class="form-control" id="firstName" name="first_name" placeholder="Matheus" value="{{ form.first_name.value|default:'' }}" required>
+                    </div>
+                    <!-- Exibe mensagens de erro para o campo nome -->
+                        {% if form.first_name.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for error in form.first_name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Sobrenome</label>
+                        <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Feu" value="{{ form.last_name.value|default:'' }}" required>
+                    </div>
+                </div>
+                <!-- Exibe mensagens de erro para o campo sobrenome -->
+                    {% if form.last_name.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.last_name.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default:'' }}" placeholder="Havokzbr" required>
+                    </div>
+                </div>
+                <!-- Exibe mensagens de erro para o campo username -->
+                    {% if form.username.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.username.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="mb-3">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{ form.email.value|default:'' }}" placeholder="seuemail@exemplo.com" required>
+                    {% if email_exists %}
+                        <span class="text-danger">Email já cadastrado.</span>
+                    {% endif %}
+                </div>
+                <!-- Exibe mensagens de erro para o campo e-mail -->
+                    {% if form.email.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="mb-3">
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" id="password1" name="password1" required>
+                </div>
+                <!-- Exibe mensagens de erro para o campo senha1 -->
+                    {% if form.password1.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.password1.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="mb-3">
+                    <label for="password2">Repetir senha</label>
+                    <input type="password" class="form-control" name="password2" id="password2">
+                </div>
+                <!-- Exibe mensagens de erro para o campo senha2 -->
+                    {% if form.password2.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.password2.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+{% endblock %}

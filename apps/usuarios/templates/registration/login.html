@@ -1,0 +1,92 @@
+{% extends '_layouts/base.html' %}
+
+{% load static %}
+
+<title>{% block title %}Login{% endblock %}</title>
+
+{% block head %}
+    <link href="{% static 'vendor/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block conteudo %}
+
+    <body class="bg-light">
+    <div class="container text-center">
+        <div class="card-wrapper">
+
+            {% include '_partials/_messages.html' %}
+
+            <form class="form-signin" method="POST">
+                {% csrf_token %}
+
+                <div class="brand">
+                    <img class="mb-4" src="{% static 'img/bonequinho.png' %}" alt="" width="72" height="72">
+                </div>
+
+                <div>
+                    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+                </div>
+
+                <!-- Exibe mensagens de erro para todos os campos -->
+                <div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="inputUsername" class="sr-only">Usuário</label>
+                    <input value="{{ form.username.value|default:'' }}" type="text" id="inputUsername" name="username"
+                           class="form-control" placeholder="usuário" required autofocus>
+                </div>
+
+                <!-- Exibe mensagens de erro para o campo username -->
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for error in form.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                <div>
+                    <label for="inputPassword" class="sr-only">Senha</label>
+                    <input value="{{ form.password.value|default:'' }}" type="password" id="inputPassword" name="password"
+                           class="form-control" placeholder="senha" required>
+                </div>
+
+                <!-- Exibe mensagens de erro para o campo password -->
+                        {% if form.password.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {% for error in form.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+
+                <div class="checkbox mb-3">
+                    Não possui uma conta? <a href="{% url 'usuarios:cadastrar_usuario' %}">Crie uma</a>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+            </form>
+        </div>
+    </div>
+    </body>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

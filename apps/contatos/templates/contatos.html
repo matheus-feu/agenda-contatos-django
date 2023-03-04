@@ -1,0 +1,187 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% load pagination_tags %}
+
+{% block title %}Lista de contatos{% endblock %}
+
+
+{% block conteudo %}
+    <div class="h-100 p-5 bg-light border rounded-4">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Search -->
+                        {% if contatos|length > 0 %}
+                            <div class="d-flex flex-row-reverse justify-content-between">
+                                <div class="d-flex flex-column justify-content-end pb-3">
+
+                                    <!-- Form Search -->
+                                    <form method="GET" id="form-search" action="">
+                                        <div class="search-box">
+                                            <input name="search" type="text" class="search-txt"
+                                                   placeholder="Pesquisar...">
+                                            <a onclick="document.getElementById('form-search').submit()"
+                                               style="cursor:pointer" class="search-btn">
+                                                <img class="loupe-blue" src="{% static 'imgs/loupe-white.svg' %}"
+                                                     alt="Lupa" width="20px" height="20px">
+                                            </a>
+                                        </div>
+                                    </form>
+                                    <!-- End Form Search -->
+
+                                </div>
+                                <div>
+                                    <p class="card-text">
+                                    <h4 class="card-title">Lista de Contatos</h4>
+                                    Aqui está a lista de <code>contatos</code> cadastrados no sistema.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Fim Search -->
+
+                            <!-- Messages -->
+                            {% if messages %}
+                                <div class="row justify-content-center mb-2">
+                                    <div class="col-2 text-center">
+                                        {% include '_partials/_messages.html' %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <!-- Fim Messages -->
+
+                            <!-- Table -->
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Sobrenome</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col" class="text-center">Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for contato in contatos %}
+                                    {% if contato.publicada %}
+                                        <tr>
+                                            <td>{{ contato.nome }}</td>
+                                            <td>{{ contato.sobrenome }}</td>
+                                            <td>{{ contato.telefone }}</td>
+                                            <td>{{ contato.categoria }}</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center" style="gap:20px">
+                                                    <button onclick="ver_contato({{ contato.id }})"
+                                                            type="button" class="btn-eyes" data-toggle="modal">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </button>
+                                                    <a href="{% url 'contato:atualizar_contato' pk=contato.id %}"
+                                                       class="btn-edit">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="{% url 'contato:excluir_contato' pk=contato.id %}"
+                                                       class="btn-trash">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm"
+                                                 role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Detalhes
+                                                            do Contato</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Fim Modal -->
+
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <!-- Fim Table -->
+
+                            <!-- Paginator -->
+                            {% if is_paginated %}
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                   href="?{% url_replace request 'page' page_obj.previous_page_number %}">&laquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1"
+                                                   aria-disabled="true">&laquo;</a>
+                                            </li>
+                                        {% endif %}
+
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="page-item active" aria-current="page">
+                                                    <a class="page-link"
+                                                       href="?{% url_replace request 'page' i %}">{{ i }}<span
+                                                            class="visually-hidden"></span></a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item">
+                                                    <a class="page-link"
+                                                       href="?{% url_replace request 'page' i %}">{{ i }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                   href="?{% url_replace request 'page' page_obj.next_page_number %}">&raquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1"
+                                                   aria-disabled="true">&raquo;</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                        {% else %}
+                            <!-- End Paginator -->
+
+                            <div class="text-center mt-2 mb-2 jumbotron">
+                                <h3>Nenhum <code>contato</code> foi adicionado ainda</h3>
+                            </div>
+                        {% endif %}
+                        <hr/>
+                        <div class="btn-lg float-right">
+                            <a class="btn btn-primary" href="{% url 'contato:cadastrar_contato' %}">Novo Contato</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block endbody %}
+    <script src="{% static 'vendor/js/list.js' %}" defer></script>
+    <script src="{% static 'vendor/js/fontawesome.js' %}"></script>
+    <script src="{% static 'vendor/js/all.js' %}"></script>
+{% endblock %}

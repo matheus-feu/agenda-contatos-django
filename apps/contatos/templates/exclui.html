@@ -1,0 +1,32 @@
+{% extends '_layouts/base.html' %}
+
+{% block title %}Excluir Contato{% endblock %}
+
+
+{% block conteudo %}
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Exclusão de Contato</h5>
+
+                <p class="card-text">
+                    Você tem certeza que quer excluir o contato <b>{{ contato.nome }}</b> da sua agenda?
+                </p>
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <hr/>
+                    <div class="text-end">
+                        <a href="{% url 'contato:lista_contatos' %}" class="btn btn-outline-danger">
+                            Cancelar
+                        </a>
+                        <button class="btn btn-danger">Excluir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

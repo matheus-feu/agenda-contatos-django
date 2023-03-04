@@ -1,0 +1,40 @@
+{% extends '_layouts/base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link href="{% static 'vendor/css/inicial.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block conteudo %}
+
+    <div class="py-5">
+        <span class="bubble active">Olá, me chamo <strong>Matheus Feu</strong><br>
+            Este projeto permite cadastrar, atualizar e organizar seus contatos preferidos.<br>
+            Abaixo estão meus links, seguem lá para apoiar!</span>
+    </div>
+
+    <div class="circle">
+        <img class="" src="{% static 'img/profile.jpg' %}">
+    </div>
+
+    <br>
+    <div class="jumbotron text-center mt-3">
+        <h1 class="display-5">Obrigado!</h1>
+        <p class="lead"><strong>Me siga nas redes sociais</strong> para obter mais informações sobre mim.
+        </p>
+
+        <hr>
+        <p>
+            Mais sobre mim? <a href="https://www.linkedin.com/in/matheus-feu-558558186/">Entre em contato</a>
+        </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-sm" href="{% url 'usuarios:cadastrar_usuario' %}"
+               role="button">Cadastre-se</a>
+        </p>
+    </div>
+
+    {% include '_partials/_footer.html' %}
+
+{% endblock %}
