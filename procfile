@@ -1,0 +1,1 @@
+web: gunicorn agenda_contatos_django.wsgi --log-file -
