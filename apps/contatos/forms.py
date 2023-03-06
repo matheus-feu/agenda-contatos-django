@@ -3,10 +3,12 @@ from django import forms
 from django.forms import Textarea
 from stdimage import StdImageField
 
-from .models import Contato, Categoria
+from .choices import *
+from .models import Contato
 
 
 class InsereContatoForm(forms.ModelForm):
+    """Esta classe é responsável por criar o formulário de inserção de contatos."""
     nome = forms.CharField(label='Nome', max_length=150,
                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}))
     sobrenome = forms.CharField(label='Sobrenome', max_length=150, required=False,
@@ -15,7 +17,7 @@ class InsereContatoForm(forms.ModelForm):
                                widget=forms.TextInput(attrs={'placeholder': '(11) 99999-9999'}))
     email = forms.EmailField(label='E-mail', max_length=150, required=False)
     descricao = forms.CharField(label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-    categoria = forms.ModelChoiceField(label='Categoria', queryset=Categoria.objects.all())
+    categoria = forms.ChoiceField(label='Categoria', choices=CATEGORIA_CHOICES)
     publicada = forms.BooleanField(label='Publicada', required=False, initial=False, widget=forms.CheckboxInput())
     avatar = StdImageField('Avatar', upload_to='Avatars/%Y/%m/%d/')
 
@@ -26,6 +28,12 @@ class InsereContatoForm(forms.ModelForm):
         widgets = {
             'descricao': Textarea(attrs={'cols': 80, 'rows': 20}),
         }
+
+    def __init__(self, *args, **kwargs):
+        """Esta função acrescente a opção 'Selecione uma categoria' no campo categoria do formulário de inserção de contatos.
+        Sendo obrigada a escolher uma categoria para o contato ser inserido no banco de dados."""
+        super().__init__(*args, **kwargs)
+        self.fields['categoria'].choices = [('', 'Selecione uma categoria')] + CATEGORIA_CHOICES
 
     def clean_nome(self):
         nome = self.cleaned_data.get('nome')
@@ -53,6 +61,7 @@ class InsereContatoForm(forms.ModelForm):
 
 
 class AtualizaContatoForm(forms.ModelForm):
+    """Esta classe é responsável por criar o formulário de atualização de contatos."""
     nome = forms.CharField(label='Nome', max_length=150,
                            widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}))
     sobrenome = forms.CharField(label='Sobrenome', max_length=150, required=False,
@@ -62,7 +71,7 @@ class AtualizaContatoForm(forms.ModelForm):
     email = forms.EmailField(label='E-mail', max_length=150, required=False)
     # data_criacao = forms.DateTimeField(label='Data de criação',widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'readonly':True}, format='%Y-%m-%dT%H:%M'), initial=timezone.now)
     descricao = forms.CharField(label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-    categoria = forms.ModelChoiceField(label='Categoria', queryset=Categoria.objects.all())
+    categoria = forms.ChoiceField(label='Categoria', choices=CATEGORIA_CHOICES)
     publicada = forms.BooleanField(label='Publicada', required=False, initial=True,
                                    widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     avatar = StdImageField('Avatar', upload_to='Avatars/%Y/%m/%d/')
@@ -75,30 +84,11 @@ class AtualizaContatoForm(forms.ModelForm):
             'descricao': Textarea(attrs={'cols': 80, 'rows': 20}),
         }
 
-    def clean_nome(self):
-        nome = self.cleaned_data.get('nome')
-
-        if nome:
-            nome = nome.strip()
-            if ' ' in nome:
-                raise forms.ValidationError('O nome não pode conter espaços')
-            elif any(char.isdigit() for char in nome):
-                raise forms.ValidationError('O nome não pode conter números')
-            else:
-                return nome
-
-
-class CriaCategoriaForm(forms.ModelForm):
-    nome = forms.CharField(label='Nome', max_length=150,
-                           widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}))
-    descricao = forms.CharField(label='Descrição', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-
-    class Meta:
-        model = Categoria
-        fields = '__all__'
-        widgets = {
-            'descricao': Textarea(attrs={'cols': 80, 'rows': 20}),
-        }
+    def __init__(self, *args, **kwargs):
+        """Esta função acrescente a opção 'Selecione uma categoria' no campo categoria do formulário de inserção de contatos.
+        Sendo obrigada a escolher uma categoria para o contato ser inserido no banco de dados."""
+        super().__init__(*args, **kwargs)
+        self.fields['categoria'].choices = [('', 'Selecione uma categoria')] + CATEGORIA_CHOICES
 
     def clean_nome(self):
         nome = self.cleaned_data.get('nome')
