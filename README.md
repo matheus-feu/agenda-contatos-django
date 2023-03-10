@@ -1,4 +1,6 @@
-[![wakatime](https://wakatime.com/badge/user/3bd24664-869f-460a-94e1-b98da8136504/project/a2a3a885-693d-491e-8a1c-95caf5eff922.svg)](https://wakatime.com/badge/user/3bd24664-869f-460a-94e1-b98da8136504/project/a2a3a885-693d-491e-8a1c-95caf5eff922) ![image](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white) ![python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue) <img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
+[![wakatime](https://wakatime.com/badge/user/3bd24664-869f-460a-94e1-b98da8136504/project/a2a3a885-693d-491e-8a1c-95caf5eff922.svg)](https://wakatime.com/badge/user/3bd24664-869f-460a-94e1-b98da8136504/project/a2a3a885-693d-491e-8a1c-95caf5eff922) ![image](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white) ![python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white) <img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
 
 
 
